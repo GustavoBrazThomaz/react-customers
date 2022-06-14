@@ -5,7 +5,7 @@ import API from '../../../hooks/API'
 function Edit({id, handleClose, setAtt}) {
 
   const [open, setOpen] = useState(false)
-  const [costumerId, setCostumersId] = useState([{
+  const [customerId, setCustomersId] = useState([{
     id: "",
     firstName: "",
     lastName: "",
@@ -14,31 +14,31 @@ function Edit({id, handleClose, setAtt}) {
     email: ""
   }])
   const ID = id
-  let costumer = costumerId
+  let customer = customerId
 
-  const getCostumersId = async () => {
+  const getCustomersId = async () => {
     const res = await API.get(`/${ID}`)
     return res.data
   }
 
   useEffect(() => {
-    const readCostumersId = async () => {
-      const idCostumers = await getCostumersId()
-      if (idCostumers) setCostumersId(idCostumers)
+    const readCustomersId = async () => {
+      const idCustomers = await getCustomersId()
+      if (idCustomers) setCustomersId(idCustomers)
     }
 
-    readCostumersId()
+    readCustomersId()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const putCostumer = () => {
+  const putCustomer = () => {
     ;
     const data = {
-      firstName: costumer.firstName,
-      lastName: costumer.lastName,
-      birthDate: costumer.birthDate,
-      carrer: costumer.carrer,
-      email: costumer.email
+      firstName: customer.firstName,
+      lastName: customer.lastName,
+      birthDate: customer.birthDate,
+      carrer: customer.carrer,
+      email: customer.email
     }
     
     API.put(`/${ID}`, data).then((res) => {
@@ -58,18 +58,18 @@ function Edit({id, handleClose, setAtt}) {
         <DialogTitle>Editar</DialogTitle>
         <DialogContent style={styleDialog}>
           <Typography>Nome:</Typography>
-          <TextField style={inputStyle} value={costumer.firstName} onChange={(e) => setCostumersId({ ...costumer, firstName: e.target.value })} />
+          <TextField style={inputStyle} value={customer.firstName} onChange={(e) => setCustomersId({ ...customer, firstName: e.target.value })} />
           <Typography>Sobrenome:</Typography>
-          <TextField style={inputStyle} value={costumer.lastName} onChange={(e) => setCostumersId({ ...costumer, lastName: e.target.value })} />
+          <TextField style={inputStyle} value={customer.lastName} onChange={(e) => setCustomersId({ ...customer, lastName: e.target.value })} />
           <Typography>Data:</Typography>
-          <TextField style={inputStyle} value={costumer.birthDate} onChange={(e) => setCostumersId({ ...costumer, birthDate: e.target.value })} type="date" />
+          <TextField style={inputStyle} value={customer.birthDate} onChange={(e) => setCustomersId({ ...customer, birthDate: e.target.value })} type="date" />
           <Typography>E-Mail:</Typography>
-          <TextField style={inputStyle} value={costumer.email} onChange={(e) => setCostumersId({ ...costumer, email: e.target.value })} />
+          <TextField style={inputStyle} value={customer.email} onChange={(e) => setCustomersId({ ...customer, email: e.target.value })} />
           <Typography>Profissão:</Typography>
-          <TextField value={costumer.carrer} onChange={(e) => setCostumersId({ ...costumer, carrer: e.target.value })} />
+          <TextField value={customer.carrer} onChange={(e) => setCustomersId({ ...customer, carrer: e.target.value })} />
         </DialogContent>
         <DialogActions style={{display: 'flex', justifyContent: 'space-between', margin: '0 20px 20px 20px'}}>
-          <Button variant='contained' color='success' onClick={putCostumer}>Editar</Button>
+          <Button variant='contained' color='success' onClick={putCustomer}>Editar</Button>
           <Button variant='contained' color='error' onClick={handleClose}>Cancel</Button>
         </DialogActions>
       </form>

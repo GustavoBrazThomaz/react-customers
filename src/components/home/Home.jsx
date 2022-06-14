@@ -11,7 +11,7 @@ export default function Home() {
 
 
   //Estados Unidos
-  const [costumers, setCostumers] = useState([])
+  const [customers, setCustomers] = useState([])
   const [elements, setElements] = useState("")
   const [pages, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -38,7 +38,7 @@ export default function Home() {
     setAtt(true)
   };
 
-  const getCostumers = async () => {
+  const getCustomers = async () => {
     let size = rowsPerPage
     let page = pages
 
@@ -93,8 +93,8 @@ export default function Home() {
   useEffect(() => {
 
     const readCostumers = async () => {
-      const allCostumers = await getCostumers()
-      if (allCostumers) setCostumers(allCostumers)
+      const allCostumers = await getCustomers()
+      if (allCostumers) setCustomers(allCostumers)
     }
 
     const readElements = async () => {
@@ -110,7 +110,7 @@ export default function Home() {
 
 
   // Variaveis
-  const rows = costumers
+  const rows = customers
   const filterOptions = ['Nome', 'Profissão']
 
   //Css
@@ -122,7 +122,7 @@ export default function Home() {
       <Container maxWidth="xl" style={{ minHeight: '100vh' }}>
         <AppBar>
           <Toolbar style={{ minHeight: 40 }}>
-            <Typography>My Costumers</Typography>
+            <Typography>My Customers</Typography>
           </Toolbar>
         </AppBar>
         <div style={styleSearch}>
